@@ -2,11 +2,13 @@
 #include "bigNumber.h"
 
 
-BigNumber::BigNumber(std::string strData):mRawData()
+BigNumber::BigNumber(std::string strData)
 {
-    for(auto&& c : strData)
+    for(auto&& i : strData) 
     {
-        int digit = (int)c - (int)'0';
+        int z = (int)'0';
+        int c = (int)i;
+        int digit = c-z;
         mRawData.push_back(digit);
         std::cout << digit << " ";
     }
@@ -27,10 +29,10 @@ std::string BigNumber::toString()
 
 BigNumber BigNumber::operator+(const BigNumber &other)
 {
-
+    return BigNumber("0");
 }
 
 BigNumber BigNumber::operator*(const BigNumber &other)
 {
-
+    return BigNumber("0");
 }

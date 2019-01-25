@@ -3,8 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/"
+                "${workspaceFolder}/**"
             ],
             "browse" : {
                 "limitSymbolsToIncludedHeaders" : true,
@@ -13,7 +12,8 @@
             "defines": [],
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
-                "/Library/Frameworks"
+                "/Library/Frameworks",
+                "/Library/Developer/CommandLineTools/usr/include/c++/v1/"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",

@@ -9,6 +9,11 @@ int main(int argc, char const *argv[])
     numX = "5678";
     numY = "1234";
 
+    std::vector<int> v(1);
+
+    v.push_back(1);
+    std::cout << "V = " << v[0] << std::endl;
+
     BigNumber x = BigNumber(numX);
     BigNumber y = BigNumber(numY);
 
