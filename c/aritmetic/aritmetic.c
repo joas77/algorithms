@@ -4,6 +4,8 @@
 
 stBigNum * aritSum(stBigNum * x, stBigNum * y)
 {
+    stBigNum * result = NULL;
+
     if ( y != NULL && x != NULL) 
     {
         size_t nDigits = x->digitNum > y->digitNum ? : x->digitNum;
@@ -15,5 +17,5 @@ stBigNum * aritSum(stBigNum * x, stBigNum * y)
         
     }
     
-    return NULL;
+    return result;
 }
