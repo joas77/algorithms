@@ -2,12 +2,18 @@
 #include "aritmetic.h"
 
 
+stBigNum* aritBigNumInit(size_t digitNum)
+{
+
+}
+
 stBigNum * aritSum(stBigNum * x, stBigNum * y)
 {
     stBigNum * result = NULL;
 
     if ( y != NULL && x != NULL) 
     {
+        result = (stBigNum *) malloc(sizeof(stBigNum));
         size_t nDigits = x->digitNum > y->digitNum ? : x->digitNum;
         uint8_t carry = 0;
         for(size_t i = 0; i < nDigits; i++)
