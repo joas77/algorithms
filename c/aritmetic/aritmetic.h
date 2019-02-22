@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include "vector.h"
 
 #define MAX(x, y) ( (x) > (y) ? (x) : (y) )
 
