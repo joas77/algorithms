@@ -2,46 +2,78 @@
 #include "aritmetic.h"
 
 
-stBigNum* aritBigNumInit(size_t digitNum)
+stBigNum* aritBigNumNew(size_t digitCount)
 {
-    return NULL;
+    stBigNum * num = (stBigNum*) malloc(sizeof(stBigNum));
+    num->digitCount = digitCount;
+    uint8Vector_init_sizeof(&num->number, digitCount);
+    return num;
 }
 
-ErrorCode aritBigNumFromStr(stBigNum *num, char * repr)
-{
-    while(*repr != '\0')
+/*
+* num shall be an empty number
+*/
+ErrorCode aritBigNumFromStr(stBigNum *num, const char * str)
+{   
+    while(*str != '\0')
     {
-        
+        uint8_t digit = (uint8_t) ( (*str) - '0' );
+        if (digit > 9 ) 
+        {
+            return INVALID_STR_REPR;
+        }
+
+        uint8Vector_push_back(&num->number, digit);
+        num->digitCount ++;
+        str++;
     }
 
     return OK;
+}
+
+char * aritBigNumToString(stBigNum * num)
+{
+    if(num->digitCount == 0)
+    {
+        return "NaN";
+    }
+    //FIXME str shall be allocated with malloc
+    char str[num->digitCount + 1];
+
+    str[num->digitCount] = '\0';
+    for(size_t i = num->digitCount - 1; i!=0; i--)
+    {
+        str[i] = num->number.data[i] + '0';
+    }
+    
+    return str;
 }
 
 stBigNum * aritSum(stBigNum * x, stBigNum * y)
 {
     stBigNum * pResult = NULL;
 
-    if ( y != NULL && x != NULL) 
-    {
-        pResult = (stBigNum *) malloc(sizeof(stBigNum));
-        uint8_t * pNumber = (uint8_t*) malloc(sizeof(MAX(x->digitNum, y->digitNum) + 1));
-        size_t nDigits = x->digitNum > y->digitNum ? x->digitNum : x->digitNum;
+    // if ( y != NULL && x != NULL) 
+    // {
+    //     pResult = (stBigNum *) malloc(sizeof(stBigNum));
+    //     uint8_t * pNumber = (uint8_t*) malloc(sizeof(MAX(x->digitNum, y->digitNum) + 1));
+    //     size_t nDigits = x->digitNum > y->digitNum ? x->digitNum : x->digitNum;
         
-        uint8_t carry = 0;
+    //     uint8_t carry = 0;
 
-        for(size_t i = 0; i < nDigits; i++)
-        {
-            pNumber[i] = x->number[i] + y->number[i];
+    //     for(size_t i = 0; i < nDigits; i++)
+    //     {
+    //         pNumber[i] = x->number[i] + y->number[i];
            
-            uint8_t currentCarry = pNumber[i]/10;
-            pNumber[i] = (pNumber[i] % 10) + carry;
+    //         uint8_t currentCarry = pNumber[i]/10;
+    //         pNumber[i] = (pNumber[i] % 10) + carry;
 
-            carry = currentCarry;
-        }
+    //         carry = currentCarry;
+    //     }
         
-        pResult->number = pNumber;
+    //     pResult->number = pNumber;
 
-    }
+    // }
     
-    return result;
+    return pResult;
 }

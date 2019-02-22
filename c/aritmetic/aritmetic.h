@@ -15,14 +15,14 @@ typedef enum error{
 
 typedef struct _stBigNum
 {
-    uint8_t *number;
-    size_t digitNum;
-    char * strRepresentation;
+    uint8Vector number;
+    size_t digitCount;
 }stBigNum;
 
-ErrorCode aritBigNumFromStr(stBigNum *num, char * repr);
+ErrorCode aritBigNumFromStr(stBigNum *num, const char * str);
+char * aritBigNumToString(stBigNum * num);
 
-stBigNum* aritBigNumInit(size_t digitNum);
+stBigNum * aritBigNumNew(size_t digitCount);
 stBigNum * aritSum(stBigNum * x, stBigNum * y);
 
 

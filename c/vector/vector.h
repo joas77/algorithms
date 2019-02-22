@@ -15,6 +15,7 @@ typedef struct
 }uint8Vector;
 
 void uint8Vector_init(uint8Vector * vector);
+void uint8Vector_init_sizeof(uint8Vector * vector, size_t size);
 void uint8Vector_push_back(uint8Vector * vector, uint8_t data);
 uint8_t uint8Vector_at(uint8Vector * vector, size_t index);
 
