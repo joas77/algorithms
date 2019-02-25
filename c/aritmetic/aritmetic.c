@@ -15,17 +15,17 @@ stBigNum* aritBigNumNew(size_t digitCount)
 */
 ErrorCode aritBigNumFromStr(stBigNum *num, const char * str)
 {   
-    while(*str != '\0')
+    size_t strLen = strlen(str);
+
+    for(int i = strLen-1; i>= 0; i--)
     {
-        uint8_t digit = (uint8_t) ( (*str) - '0' );
+        uint8_t digit = (uint8_t) (str[i] - '0');
         if (digit > 9 ) 
         {
             return INVALID_STR_REPR;
         }
-
         uint8Vector_push_back(&num->number, digit);
         num->digitCount ++;
-        str++;
     }
 
     return OK;
@@ -37,13 +37,15 @@ char * aritBigNumToString(stBigNum * num)
     {
         return "NaN";
     }
-    //FIXME str shall be allocated with malloc
-    char str[num->digitCount + 1];
+    
+    char * str = (char *) malloc((num->digitCount +1) * sizeof(char));
+    char * str_it = str;
 
     str[num->digitCount] = '\0';
-    for(size_t i = num->digitCount - 1; i!=0; i--)
+    for(int i = num->digitCount - 1; i>=0; i--)
     {
-        str[i] = num->number.data[i] + '0';
+        *str_it = num->number.data[i] + '0';
+        str_it++;
     }
     
     return str;

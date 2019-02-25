@@ -9,8 +9,10 @@ int main(int argc, char * argv[])
 
     stBigNum * pNumber = aritBigNumNew(0);
     aritBigNumFromStr(pNumber, "1234");
-
-    printf("%s", aritBigNumToString(pNumber));
+    char * string = "hola mundo";
+    char * strNum = aritBigNumToString(pNumber);
+    printf("%s\n", strNum);
+    printf("%s\n", string);
 
 
     return 0;
