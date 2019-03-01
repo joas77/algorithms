@@ -11,6 +11,17 @@ stBigNum* aritBigNumNew(size_t digitCount)
 }
 
 /*
+* Frees memory in num and set num=NULL 
+* if num is NULL aritBigNumDelete does nothing
+*/
+void aritBigNumDelete(stBigNum * num)
+{
+    uint8Vector_delete(&num->number);
+    free(num);
+    num = NULL;
+}
+
+/*
 * num shall be an empty number
 */
 ErrorCode aritBigNumFromStr(stBigNum *num, const char * str)
@@ -51,31 +62,32 @@ char * aritBigNumToString(stBigNum * num)
     return str;
 }
 
-stBigNum * aritSum(stBigNum * x, stBigNum * y)
+ErrorCode aritSum(stBigNum * result, stBigNum * x, stBigNum * y)
 {
-    stBigNum * pResult = NULL;
+    ErrorCode errCode = OK;
 
-    // if ( y != NULL && x != NULL) 
-    // {
-    //     pResult = (stBigNum *) malloc(sizeof(stBigNum));
-    //     uint8_t * pNumber = (uint8_t*) malloc(sizeof(MAX(x->digitNum, y->digitNum) + 1));
-    //     size_t nDigits = x->digitNum > y->digitNum ? x->digitNum : x->digitNum;
-        
-    //     uint8_t carry = 0;
+    if ( y != NULL && x != NULL) 
+    {
+        size_t nDigits = MIN(x->digitCount, y->digitCount);
+        uint8_t carry = 0;
 
-    //     for(size_t i = 0; i < nDigits; i++)
-    //     {
-    //         pNumber[i] = x->number[i] + y->number[i];
+        for(size_t i = 0; i < nDigits; i++)
+        {
+            uint8Vector_push_back(result, uint8Vector_at(x, i) + uint8Vector_at(y, i));
            
-    //         uint8_t currentCarry = pNumber[i]/10;
-    //         pNumber[i] = (pNumber[i] % 10) + carry;
-
-    //         carry = currentCarry;
-    //     }
+            uint8_t currentCarry = uint8Vector_at(result, i)/10;
+            result->number.data[i] = ( uint8Vector_at(result, i)%10 ) + carry;
+            carry = currentCarry;
+        }
         
-    //     pResult->number = pNumber;
+        // suming remainder digits
 
-    // }
+
+    }
+    else
+    {
+        errCode = INVALID_NUMBER;
+    }
     
-    return pResult;
+    return errCode;
 }

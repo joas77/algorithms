@@ -14,6 +14,7 @@ int main(int argc, char * argv[])
     printf("%s\n", strNum);
     printf("%s\n", string);
 
+    // TODO: free objects
 
     return 0;
 }

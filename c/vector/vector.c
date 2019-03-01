@@ -9,6 +9,16 @@ void uint8Vector_init(uint8Vector * vector)
     vector->data = (uint8_t*) malloc(DEFAULT_CAPACITY * sizeof(uint8_t));
 }
 
+/*
+* frees data allocated by vector an sets vector to NULL
+*/
+void uint8Vector_delete(uint8Vector * vector)
+{
+    free(vector->data);
+    free(vector);
+    vector = NULL;
+}
+
 void uint8Vector_init_sizeof(uint8Vector * vector, size_t size)
 {
     uint8Vector_init(vector);

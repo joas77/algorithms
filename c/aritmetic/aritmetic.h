@@ -6,10 +6,12 @@
 #include "vector.h"
 
 #define MAX(x, y) ( (x) > (y) ? (x) : (y) )
+#define MIN(x, y) ( (x) < (y) ? (x) : (y) )
 
 typedef enum error{
     OK = 0,
-    INVALID_STR_REPR = 1
+    INVALID_STR_REPR = 1,
+    INVALID_NUMBER = 2
     
 }ErrorCode;
 
@@ -20,10 +22,11 @@ typedef struct _stBigNum
 }stBigNum;
 
 ErrorCode aritBigNumFromStr(stBigNum *num, const char * str);
+void aritBigNumDelete(stBigNum * num);
 char * aritBigNumToString(stBigNum * num);
 
 stBigNum * aritBigNumNew(size_t digitCount);
-stBigNum * aritSum(stBigNum * x, stBigNum * y);
+ErrorCode aritSum(stBigNum * result, stBigNum * x, stBigNum * y);
 
 
 #endif /*ARITMETIC_H*/
