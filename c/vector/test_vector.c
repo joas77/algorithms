@@ -9,7 +9,7 @@ int main()
 
     uint8Vector_init(&vector);
 
-    for(size_t i = 0; i < 100; i++)
+    for(size_t i = 0; i < 10; i++)
     {
         uint8Vector_push_back(&vector, i);
         printVector(&vector);
