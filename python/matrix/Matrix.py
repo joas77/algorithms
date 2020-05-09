@@ -18,6 +18,15 @@ class SquareMatrix:
     def rows(self):
         return self._rows
 
+    def pprint(self):
+        # pretty print matrix
+        for i in range(self.rows):
+            print("[", end="\t")
+            for j in range(self.rows):
+                print(self._matrix[i][j], end="\t")
+
+            print("]")                
+
 def random_sqr_matrix(rows, min=0, max=100):
     random_matrix = SquareMatrix(rows)
     for i in range(rows):
@@ -42,7 +51,10 @@ if __name__ == "__main__":
     A = random_sqr_matrix(2, max=10)
     B = random_sqr_matrix(2, max=10)
     print("square matrix")
-    print(A)
-    print(B)
-    print(square_matrix_mult(A,B))
+    print("Matrix A")
+    A.pprint()
+    print("Matrix B")
+    B.pprint()
+    print("A*B")
+    square_matrix_mult(A,B).pprint()
 
