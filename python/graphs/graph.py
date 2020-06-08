@@ -1,6 +1,8 @@
 import random
 import copy
 import math
+from collections import deque
+
 
 
 class Graph:
@@ -8,8 +10,12 @@ class Graph:
         #self.graph =  copy.deepcopy(dict_repr)
         raw = copy.deepcopy(adjlist)
         self.graph = {}
+        self.visited = {}
         for nodes in raw:
-            self.graph[nodes.pop(0)] = nodes 
+            val = nodes.pop(0)
+            self.graph[val] = nodes
+            self.visited[val] = False
+
 
     @property
     def num_vertices(self):
@@ -25,6 +31,33 @@ class Graph:
 
     def __str__(self):
         return str(self.graph)
+
+    def dfs_topo(self, vertex):
+        # mark all vertices as unexplored
+        for node in self.graph:
+            self.visited[node] = False
+
+        stack = deque([vertex])
+        while len(stack) > 0:
+            v = stack.pop()
+            if not self.visited[v]:
+                self.visited[v] = True
+                for w in self.graph[v]:
+                    stack.append(w)
+
+    def dfs_top(self, vertex):
+        
+        stack = deque([vertex])
+        while len(stack) > 0:
+            v = stack.pop()
+            if not self.visited[v]:
+                self.visited[v] = True
+                for w in self.graph[v]:
+                    stack.append(w)
+
+    def topo_sort(self):
+        pass
+
 
 # TODO: use graph.edges_at_vertice(v) instead of graph.graph(v)
 
@@ -88,22 +121,18 @@ def alg(test_file):
 
 
 if __name__ == "__main__":
-    # g = {1: [2, 3],
-    #      2: [1, 3, 4],
-    #      3: [1, 2, 4],
-    #      4: [3, 2]
-    #      }
+    g = [[1, 2, 3],
+         [2, 1, 3, 4],
+         [3, 1, 2, 4],
+         [4, 3, 2]
+    ]
 
-    # graph = Graph(g)
-    # print(graph)
-    # print("Testing merge method...")
-    # print("Merging  vertice 1 and 2...")
-    # merge(graph, 1, 2)
-    # print(graph)
-    # print("Merging  vertice 1 and 3...")
-    # merge(graph, 1, 3)
-    # print(graph)
-    # print(minimum_cut(graph))
-    # print(graph)
+    graph = Graph(g)
+    print(graph)
+    print("Testing DFS method...")
+    graph.dfs(1)
+    print("visited vertices:")
+    print(graph.visited)
+    
 
-    alg("KargerMinCut.txt")
+    #alg("KargerMinCut.txt")
