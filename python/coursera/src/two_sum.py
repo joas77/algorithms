@@ -19,4 +19,4 @@ def alg(test_file):
     return target_counter
 
 if __name__ == "__main__":
-    alg("algo1-programming_prob-2sum.txt")
+    alg("datasets/algo1-programming_prob-2sum.txt")

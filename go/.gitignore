@@ -1,2 +1,6 @@
 # go generated packages
 pkg/
+go
+bin/
+# vscode garbage
+.vscode

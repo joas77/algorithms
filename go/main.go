@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"graph"
 	"io/ioutil"
 	"log"
+	"strconv"
 	"strings"
 )
 
@@ -25,7 +25,7 @@ func readGraph(file string) map[int][]int {
 		nodes := strings.Split(line, " ")
 		graphInt = append(graphInt, make([]int, len(nodes)))
 		for j, elem := range nodes {
-			graphInt[i][j], _ = strconv.Atoi(elem)	
+			graphInt[i][j], _ = strconv.Atoi(elem)
 		}
 	}
 
@@ -34,9 +34,9 @@ func readGraph(file string) map[int][]int {
 	graph := make(map[int][]int)
 
 	for _, arr := range graphInt {
-		key:= arr[0]
+		key := arr[0]
 		graph[key] = make([]int, len(arr)-1)
-		for i := 1; i <= len(arr) - 1; i++ {
+		for i := 1; i <= len(arr)-1; i++ {
 			graph[key][i-1] = arr[i]
 		}
 	}
@@ -45,7 +45,7 @@ func readGraph(file string) map[int][]int {
 }
 
 func main() {
-	fileName := "./test/simple_graph.txt"
+	fileName := "./test/input_mostlyCycles_1_8.txt" //simple_graph.txt"
 
 	graphMap := readGraph(fileName)
 	fmt.Println(graphMap)
