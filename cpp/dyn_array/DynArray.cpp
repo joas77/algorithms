@@ -74,10 +74,19 @@ std::ostream& operator<<(std::ostream& os, const DynArray<T>& dynArr)
 	 return os << "]" << std::endl;
 }
 
+template <typename T>
+void dynArrInfo(const DynArray<T>& dynArr)
+{
+    std::cout << dynArr;
+    std::cout << "size = " << dynArr.size() << " capacity = " << 
+        dynArr.capacity() << std::endl;
+}
+
 int main()
 {
 	DynArray<int> dynArray;
 	DynArray<float> dynFloat;
+	DynArray<DynArray<int> > dynDynArr;
 	
 	float eps = 0.1;
 	
@@ -85,12 +94,13 @@ int main()
 	{
 		dynArray.push_back(i);
 		dynFloat.push_back(eps*i);
+		
+		//dynDynArr.push_back(dynArray); // double free or corruption
 	}
-	std::cout << dynArray;
-	std::cout << "size = " << dynArray.size() << " capacity = " << dynArray.capacity() << std::endl;
 	
-	std::cout << dynFloat;
-	std::cout << "size = " << dynFloat.size() << " capacity = " << dynFloat.capacity() << std::endl;
+	dynArrInfo(dynArray);
+	dynArrInfo(dynFloat);
+	dynArrInfo(dynDynArr);
 	
 	return 0;
 }
