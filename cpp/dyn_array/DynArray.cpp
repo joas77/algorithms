@@ -10,13 +10,15 @@ int main()
 	
 	float eps = 0.1;
 	
-	for(size_t i=1; i<=100; ++i)
+	for(size_t i=1; i<=4; ++i)
 	{
 		dynArray.push_back(i);
 		dynFloat.push_back(eps*i);
 		
-		//dynDynArr.push_back(dynArray); // double free or corruption
+		dynDynArr.push_back(dynArray); // double free or corruption
 	}
+	
+	std::cout << "Finished initialization" <<std::endl;
 
 	dynArrInfo(dynArray);
 	dynArrInfo(dynFloat);

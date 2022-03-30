@@ -8,12 +8,16 @@ public:
 		m_data(new T[m_capacity])
 	{}
 	
+	DynArray(const DynArray<T>& dynArr);
+	DynArray(DynArray<T>&&) = delete;
+	DynArray<T>& operator=(const DynArray<T>&);
+	
 	~DynArray()
 	{
-		delete[] m_data;
+	    free();
 	}
 	
-	T at(size_t index) const
+	T& at(size_t index) const
 	{
 		return m_data[index];
 	}
@@ -59,7 +63,52 @@ private:
 	size_t m_capacity;
 	size_t m_size;
 	T* m_data;
+	void copy(const DynArray<T>& src);
+	void free();
 };
+
+template<typename T>
+void DynArray<T>::free()
+{
+    if(m_data)
+    {
+        delete[] m_data;
+        m_data = nullptr;
+        m_size = 0;
+        m_capacity=0; 
+    }
+}
+
+template<typename T>
+void DynArray<T>::copy(const DynArray<T>& src)
+{
+    for(size_t i=0; i<src.size(); i++)
+    {
+        push_back(src.at(i));
+    }
+}
+
+// copy constructor
+template<typename T>
+DynArray<T>::DynArray(const DynArray<T>& src)
+    : DynArray()
+{
+    copy(src);
+}
+
+template<typename T>
+DynArray<T>& DynArray<T>::operator=(const DynArray<T>& rhs)
+{
+    if(this == &rhs) return *this;
+        
+    free();
+    m_capacity = 4;
+    m_data = new T[m_capacity];
+    
+    copy(rhs);
+        
+   return *this;
+}
 
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const DynArray<T>& dynArr)
