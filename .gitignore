@@ -1,2 +1,5 @@
 # Mac crap
 .DS_Store
+
+#visual code
+.vscode
