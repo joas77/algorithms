@@ -7,8 +7,15 @@ std::vector<int> generateRandIntVector(int size)
 {
     std::vector<int> randVect(size);
 
-    std::random_device r;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> ditrib(0,255);
 
+    for(auto& elem: randVect)
+    {
+        elem = ditrib(gen);
+    }
+    
     return randVect;
 }
 
