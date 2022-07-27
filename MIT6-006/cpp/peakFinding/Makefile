@@ -1,5 +1,6 @@
 CC = g++
-CPPFLAGS = -std=c++17 -Wall
+LIBS = ../libs
+CPPFLAGS = -std=c++17 -Wall -g -I $(LIBS)
 
 test: *.cpp
 	$(CC) $(CPPFLAGS) $^ -o $@
