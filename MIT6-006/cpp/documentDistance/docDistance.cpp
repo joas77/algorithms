@@ -21,9 +21,15 @@ int FileReader::getUniqueWords()
     return mWordFreq.size();
 }
 
+
 const std::string& FileReader::name()
 {
     return mName;
+}
+
+const WordVector& FileReader::getWordFrequency()
+{
+    return mWordFreq;
 }
 
 std::vector<std::string> FileReader::readFile(std::string_view filePath)
@@ -54,7 +60,7 @@ std::vector<std::string> FileReader::readFile(std::string_view filePath)
 }
 
 
-std::unordered_map<std::string, int> FileReader::countWordFreq(const std::vector<std::string>& words)
+WordVector FileReader::countWordFreq(const std::vector<std::string>& words)
 {
     std::unordered_map<std::string, int> wordVector;
     for(const auto& w: words)
@@ -81,7 +87,7 @@ int innnerProduct(const WordVector& wordVectA, const WordVector& wordVectB)
     {
         if(wordVectB.find(word)!= wordVectB.end())
         {
-            dotProduct += wordVectA[word] * wordVectB[word];
+            dotProduct += wordVectA.at(word) * wordVectB.at(word);
         }
     }
     return dotProduct;

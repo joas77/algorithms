@@ -26,5 +26,7 @@ int main(int argc, char *argv[])
     auto docVector1 = docInfo1.getWordFrequency();
     auto docVector2 = docInfo2.getWordFrequency();
 
+    std::cout << "The distance between the documents is: " << angle(docVector1, docVector2) << " (radians)" << std::endl;
+
     return 0;
 }
